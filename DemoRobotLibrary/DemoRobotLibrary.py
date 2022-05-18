@@ -31,8 +31,11 @@ __version__ = "0.1.0"
 __author__ = "Joerg Schultze-Lutter"
 
 # Our demo class
+# We use Global scope along with Robot's 
+# "auto_keywords" feature  in disabled mode
 @library(scope="GLOBAL", auto_keywords=False)
 class DemoRobotLibrary:
+
     # Default parameter settings
     DEFAULT_NAME = None
     DEFAULT_LANGUAGE = "en"
@@ -50,7 +53,9 @@ class DemoRobotLibrary:
         self.__demo_name = demo_name
         self.__demo_language = demo_language
 
-    # Python "Getter"
+    #
+    # Python "getter" methods
+    #
     @property
     def demo_name(self):
         return self.__demo_name
@@ -59,7 +64,9 @@ class DemoRobotLibrary:
     def demo_language(self):
         return self.__demo_language
 
-    # Python "Setter"
+    #
+    # Python "setter" methods
+    #
     @demo_name.setter
     def demo_name(self, demo_name: str):
         if not demo_name:
@@ -75,7 +82,9 @@ class DemoRobotLibrary:
             raise ValueError("Invalid value for 'language' was specified")
         self.__demo_language = demo_language
 
-    # Robot "Getter" Keywords
+    #
+    # Robot "getter" methods
+    #
     @keyword("Get My Name")
     def get_demo_name(self):
         return self.demo_name
@@ -84,7 +93,9 @@ class DemoRobotLibrary:
     def get_demo_language(self):
         return self.demo_language
 
-    # Robot "Setter" Keywords
+    #
+    # Robot "setter" methods
+    #
     @keyword("Set My Name")
     def set_demo_name(self, name: str = None):
         logger.debug(msg="Setting Demo 'name'")
@@ -95,6 +106,10 @@ class DemoRobotLibrary:
         logger.debug(msg="Setting Demo 'language'")
         self.demo_language = language
 
+    #
+    # An internal function that we deliberately exclude
+    # from being promoted to a Robot Framework keyword
+    #
     @not_keyword
     def get_daytime_salutation(self, language: str):
         retval = None
@@ -113,6 +128,10 @@ class DemoRobotLibrary:
 
         return retval
 
+    #
+    # Our demo function which will return a language- and time-specific
+    # salutation back to the user
+    #
     @keyword("Get My Salutation")
     def get_the_salutation_text(self, name: str, language: str = None):
         logger.debug(msg="Get the salutation text")
