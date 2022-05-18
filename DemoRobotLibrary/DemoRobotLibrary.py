@@ -41,6 +41,15 @@ class DemoRobotLibrary:
 	__demo_name = None
 	__demo_language = None
 
+	# Constructor
+	def __init__(
+		self,
+		demo_name: str = DEFAULT_NAME,
+		demo_language: str = DEFAULT_LANGUAGE,
+	):
+		self.__demo_name = demo_name
+		self.__demo_language = demo_language
+
 	# Python "Getter"
 	@property
 	def demo_name(self):
@@ -50,7 +59,7 @@ class DemoRobotLibrary:
 	def demo_language(self):
 		return self.__demo_language
 
-	  # Python "Setter"
+	# Python "Setter"
 	@demo_name.setter
 	def demo_name(self, demo_name: str):
 		if not demo_name:
@@ -93,7 +102,7 @@ class DemoRobotLibrary:
 		a = datetime.now().hour
 		if a < 6 or a > 23:
 				retval = "Gute Nacht" if language == "de" else "Good Night"
-		elif a >= 6 and <= 11:
+		elif a >= 6 and a <= 11:
 				retval = "Guten Morgen" if language == "de" else "Good Day"
 		elif a >=12 and a <= 17:
 				retval = "Guten Nachmittag" if language == "de" else "Good Afternoon"
